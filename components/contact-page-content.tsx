@@ -31,8 +31,8 @@ export function ContactPageContent() {
               <ul className="space-y-4 text-sm text-muted-foreground">
                 <li className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-primary shrink-0" />
-                  <a href="mailto:rokeshuvaraj1@gmail.com" className="hover:text-foreground transition-colors">
-                    rokeshuvaraj1@gmail.com
+                  <a href="mailto:rokeshuvarajn@vt.edu" className="hover:text-foreground transition-colors">
+                    rokeshuvarajn@vt.edu
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
