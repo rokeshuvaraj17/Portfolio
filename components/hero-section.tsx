@@ -1,52 +1,15 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-
-function WireframeUAV() {
-  return (
-    <motion.div
-      className="w-full max-w-md h-64 flex items-center justify-center"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-    >
-      <motion.svg
-        viewBox="0 0 200 120"
-        className="w-full h-full text-primary/60"
-        animate={{ opacity: [0.5, 0.9, 0.5] }}
-        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      >
-        {/* Body fuselage */}
-        <line x1="100" y1="20" x2="100" y2="100" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.8" />
-        {/* Wings */}
-        <line x1="40" y1="60" x2="160" y2="60" stroke="currentColor" strokeWidth="1" strokeOpacity="0.7" />
-        <line x1="70" y1="45" x2="130" y2="75" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5" />
-        <line x1="70" y1="75" x2="130" y2="45" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5" />
-        {/* Nose */}
-        <circle cx="100" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.9" />
-        {/* Tail */}
-        <line x1="100" y1="100" x2="85" y2="115" stroke="currentColor" strokeWidth="1" strokeOpacity="0.6" />
-        <line x1="100" y1="100" x2="115" y2="115" stroke="currentColor" strokeWidth="1" strokeOpacity="0.6" />
-        {/* Coordinate axes hint */}
-        <motion.g
-          animate={{ opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-        >
-          <line x1="100" y1="60" x2="140" y2="60" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 2" />
-          <line x1="100" y1="60" x2="100" y2="20" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 2" />
-        </motion.g>
-      </motion.svg>
-    </motion.div>
-  )
-}
 
 export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 px-4 sm:px-6 lg:px-8 pt-24 pb-16 bg-grid-pattern"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 px-4 sm:px-6 lg:px-8 pt-28 md:pt-24 pb-16 bg-grid-pattern"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/40 pointer-events-none" />
       <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
@@ -95,7 +58,21 @@ export function HeroSection() {
           </motion.div>
         </div>
         <div className="flex-1 flex justify-center md:justify-end">
-          <WireframeUAV />
+          <motion.div
+            className="relative w-full max-w-md aspect-[3/4] overflow-hidden"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <Image
+              src="/images/Professional_Photo.jpg"
+              alt="Rokeshuvaraj Nagarajan"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 448px"
+              priority
+            />
+          </motion.div>
         </div>
       </div>
     </section>

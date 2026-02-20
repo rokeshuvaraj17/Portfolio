@@ -45,7 +45,7 @@ const projectsData = {
     title: "Design and Fabrication of Balloon Satellite",
     period: "Mar 2019 - May 2019",
     category: "Space Systems",
-    image: "/balloon-satellite.png",
+    image: "/placeholder.svg",
     overview:
       "Comprehensive research project to study atmospheric parameters, temperature, density, and pressure at various altitudes from sea level to thirty-five kilometers. The project involved designing a complete satellite system using Raspberry Pi as the main computer.",
     objectives: [
@@ -161,7 +161,7 @@ const projectsData = {
     title: "Voice-Controlled Drone",
     period: "Sep 2019 - Nov 2019",
     category: "Control Systems",
-    image: "/voice-controlled-drone.png",
+    image: "/placeholder.svg",
     overview:
       "Developed an innovative voice-controlled UAV system using Arduino board with pre-programmed voice commands in combination with an Android application. The project focused on creating a user-friendly control interface.",
     objectives: [
