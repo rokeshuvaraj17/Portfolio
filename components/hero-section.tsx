@@ -1,108 +1,101 @@
 "use client"
 
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Mail, Linkedin, Github, GraduationCap } from "lucide-react"
+import { motion } from "framer-motion"
+
+function WireframeUAV() {
+  return (
+    <motion.div
+      className="w-full max-w-md h-64 flex items-center justify-center"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+    >
+      <motion.svg
+        viewBox="0 0 200 120"
+        className="w-full h-full text-primary/60"
+        animate={{ opacity: [0.5, 0.9, 0.5] }}
+        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+      >
+        {/* Body fuselage */}
+        <line x1="100" y1="20" x2="100" y2="100" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.8" />
+        {/* Wings */}
+        <line x1="40" y1="60" x2="160" y2="60" stroke="currentColor" strokeWidth="1" strokeOpacity="0.7" />
+        <line x1="70" y1="45" x2="130" y2="75" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5" />
+        <line x1="70" y1="75" x2="130" y2="45" stroke="currentColor" strokeWidth="1" strokeOpacity="0.5" />
+        {/* Nose */}
+        <circle cx="100" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.9" />
+        {/* Tail */}
+        <line x1="100" y1="100" x2="85" y2="115" stroke="currentColor" strokeWidth="1" strokeOpacity="0.6" />
+        <line x1="100" y1="100" x2="115" y2="115" stroke="currentColor" strokeWidth="1" strokeOpacity="0.6" />
+        {/* Coordinate axes hint */}
+        <motion.g
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+        >
+          <line x1="100" y1="60" x2="140" y2="60" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 2" />
+          <line x1="100" y1="60" x2="100" y2="20" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 2" />
+        </motion.g>
+      </motion.svg>
+    </motion.div>
+  )
+}
 
 export function HeroSection() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        {/* Aerospace-inspired geometric pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary/80 dark:from-primary dark:via-primary/95 dark:to-primary/90 z-0">
-          {/* Grid pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-20 dark:opacity-30"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-              `,
-              backgroundSize: "50px 50px",
-            }}
-          />
-          {/* Aerospace circuit pattern */}
-          <div
-            className="absolute inset-0 opacity-10 dark:opacity-20"
-            style={{
-              backgroundImage: `
-                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.2) 2px, transparent 2px)
-              `,
-              backgroundSize: "100px 100px",
-            }}
-          />
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 px-4 sm:px-6 lg:px-8 pt-24 pb-16 bg-grid-pattern"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/40 pointer-events-none" />
+      <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="flex-1 text-center md:text-left">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Engineering Autonomous Intelligence.
+          </motion.h1>
+          <motion.p
+            className="text-lg sm:text-xl text-muted-foreground max-w-xl mb-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Aerospace Engineer specializing in Guidance, Control, State Estimation, and AI-Driven Flight Systems.
+          </motion.p>
+          <motion.p
+            className="text-sm text-muted-foreground/90 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            M.S. Aerospace Engineering — Virginia Tech
+            <br />
+            Autonomous Systems · GNC · Deep Learning
+          </motion.p>
+          <motion.div
+            className="flex flex-wrap gap-3 justify-center md:justify-start"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link href="/#projects">View Projects</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="border-primary/50 text-primary hover:bg-primary/10">
+              <a href="/resume/Rokeshuvaraj_Resume.pdf" download="Rokeshuvaraj_Resume.pdf">Download Resume</a>
+            </Button>
+            <Button asChild variant="ghost" size="lg" className="text-muted-foreground hover:text-foreground">
+              <Link href="/contact">Contact</Link>
+            </Button>
+          </motion.div>
         </div>
-      </div>
-
-      <div className="relative z-20 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-black mb-6 animate-fade-in-up">
-          Rokeshuvaraj N
-        </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl font-sans font-medium mb-8 animate-fade-in-up animation-delay-200">
-          Aerospace Systems Engineer | Systems Integration | Safety & Reliability
-        </p>
-        <p className="text-lg sm:text-xl mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up animation-delay-400">
-          Innovating the future of aerospace through cutting-edge systems engineering, safety-critical design, and
-          advanced computational methods.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in-up animation-delay-600">
-          <Button
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-white px-8 py-3 text-lg"
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            View My Work
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-white text-white hover:bg-white hover:text-primary px-8 py-3 text-lg bg-transparent"
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            Get In Touch
-          </Button>
-        </div>
-
-        <div className="flex justify-center space-x-6 animate-fade-in-up animation-delay-800">
-          <a
-            href="mailto:rokeshuvarajn@vt.edu"
-            className="text-white hover:text-accent transition-colors duration-200"
-            aria-label="Email"
-          >
-            <Mail className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/rokeshuvarajnagarajan/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-accent transition-colors duration-200"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="h-6 w-6" />
-          </a>
-          <a
-            href="https://github.com/rokeshuvaraj"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-accent transition-colors duration-200"
-            aria-label="GitHub"
-          >
-            <Github className="h-6 w-6" />
-          </a>
-          <a
-            href="https://scholar.google.com/citations?user=sJGgY4EAAAAJ&hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-accent transition-colors duration-200"
-            aria-label="Google Scholar"
-          >
-            <GraduationCap className="h-6 w-6" />
-          </a>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ArrowDown className="h-6 w-6 text-white" />
+        <div className="flex-1 flex justify-center md:justify-end">
+          <WireframeUAV />
         </div>
       </div>
     </section>

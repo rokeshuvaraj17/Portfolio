@@ -1,193 +1,72 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
-import { GraduationCap, Briefcase, Award, Target } from "lucide-react"
 import { motion } from "framer-motion"
-import Image from "next/image"
+
+function ControlBlockDiagram() {
+  return (
+    <svg viewBox="0 0 240 160" className="w-full h-full max-h-80 text-primary/50" fill="none" stroke="currentColor" strokeWidth="1">
+      <rect x="20" y="60" width="50" height="32" rx="4" strokeOpacity="0.6" />
+      <text x="45" y="78" className="fill-current text-[8px] font-mono" stroke="none" opacity="0.8">Plant</text>
+      <rect x="110" y="60" width="50" height="32" rx="4" strokeOpacity="0.6" />
+      <text x="125" y="78" className="fill-current text-[8px] font-mono" stroke="none" opacity="0.8">EKF</text>
+      <rect x="170" y="60" width="50" height="32" rx="4" strokeOpacity="0.6" />
+      <text x="185" y="78" className="fill-current text-[8px] font-mono" stroke="none" opacity="0.8">Ctrl</text>
+      <path d="M 70 76 L 105 76" strokeOpacity="0.5" markerEnd="url(#arrow)" />
+      <path d="M 160 76 L 165 76" strokeOpacity="0.5" />
+      <path d="M 220 76 L 195 76" strokeOpacity="0.5" />
+      <path d="M 20 92 L 0 92 L 0 40 L 20 40" strokeOpacity="0.4" strokeDasharray="2 2" />
+      <defs>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0 0 L6 3 L0 6 Z" fill="currentColor" opacity="0.6" />
+        </marker>
+      </defs>
+    </svg>
+  )
+}
 
 export function AboutSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  }
-
   return (
-    <section
-      id="about"
-      className="py-20 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden"
-    >
-      <motion.div
-        className="absolute top-16 right-8 opacity-10 dark:opacity-20"
-        animate={{
-          y: [0, -30, 0],
-          rotate: [0, 10, 0],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-      >
-        <Image src="/images/rocket-engine-fire.png" alt="Rocket Engine" width={150} height={150} />
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-20 left-8 opacity-8 dark:opacity-15"
-        animate={{
-          x: [0, 20, 0],
-          y: [0, -15, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-          delay: 3,
-        }}
-      >
-        <Image src="/images/satellite-system.png" alt="Satellite" width={120} height={120} />
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
+    <section id="about" className="py-24 bg-muted/30 border-y border-border">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          className="text-2xl sm:text-3xl font-semibold text-foreground mb-12"
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
-            About Me
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Bridging aerospace engineering and software development through innovation and precision
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          About
+        </motion.h2>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            className="space-y-4 text-muted-foreground leading-relaxed"
+            initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="relative">
-              <motion.img
-                src="/images/aerospace-engineer.png"
-                alt="Aerospace Systems Engineer - Technical Illustration"
-                className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-lg"></div>
+            <p>
+              I focus on guidance, navigation, and control (GNC) with a strong foundation in state estimation and flight dynamics. My work centers on Kalman filtering, sensor fusion, and nonlinear 6-DOF modeling for UAVs, combined with classical and modern control (PID, LQR, MPC) and control allocation.
+            </p>
+            <p>
+              I am integrating learning-based components into control and estimation pipelines—exploring hybrid model-based and data-driven approaches for flight systems. This is supported by graduate coursework in deep learning (neural networks, optimization, backpropagation) and data structures and algorithms, along with software engineering practice in Python, C/C++, and MATLAB/Simulink.
+            </p>
+            <p>
+              As a Teaching Assistant at Virginia Tech I teach system dynamics and control (AOE 3034) and computational methods (AOE 2074), covering state-space modeling, stability analysis, root-finding, numerical methods, and MATLAB-based dynamic systems. My approach is analytical and precise, with an emphasis on validation and clarity.
+            </p>
+          </motion.div>
+          <motion.div
+            className="flex justify-center lg:justify-end"
+            initial={{ opacity: 0, x: 16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="w-full max-w-sm rounded-xl border border-border bg-card shadow-sm p-6">
+              <ControlBlockDiagram />
             </div>
           </motion.div>
-
-          <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <motion.p
-              className="text-lg leading-relaxed"
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              I am a driven Aerospace Systems Engineer with a strong foundation in both engineering design and software
-              development. My journey spans from building rockets, drones, and satellite prototypes to developing modern
-              web applications and data-driven solutions.
-            </motion.p>
-            <motion.p
-              className="text-lg leading-relaxed"
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              Currently pursuing my Master's in Aerospace Engineering at Virginia Tech with a focus on systems
-              integration, computational methods, and safety engineering. I thrive at the intersection of engineering,
-              software, and innovation, aiming to contribute to the next generation of aerospace systems that are safer,
-              more reliable, and more sustainable.
-            </motion.p>
-            <motion.p
-              className="text-lg leading-relaxed"
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.5 }}
-              viewport={{ once: true }}
-            >
-              As a Graduate Teaching Assistant, I support undergraduate students in mastering computational methods for
-              aerospace applications, demonstrating strong communication, teaching, and mentorship skills.
-            </motion.p>
-          </motion.div>
         </div>
-
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {[
-            {
-              icon: GraduationCap,
-              title: "Education",
-              description: "MS Aerospace Engineering\nVirginia Tech (3.9 GPA)",
-            },
-            {
-              icon: Briefcase,
-              title: "Experience",
-              description: "Software Engineer\nAerospace Projects",
-            },
-            {
-              icon: Award,
-              title: "Achievements",
-              description: "Published Research\nConference Presentations",
-            },
-            {
-              icon: Target,
-              title: "Goals",
-              description: "Aerospace R&D\nSystems Integration",
-            },
-          ].map((item, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm hover:bg-card/80 group">
-                <CardContent className="pt-6">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <item.icon className="h-12 w-12 text-primary mx-auto mb-4 group-hover:text-accent transition-colors duration-300" />
-                  </motion.div>
-                  <h3 className="font-serif font-semibold text-lg mb-2 group-hover:text-primary transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground whitespace-pre-line">{item.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   )
