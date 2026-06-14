@@ -2,9 +2,9 @@
 
 import { useParams, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 import { ArrowLeft, Calendar, Users, Target, Lightbulb, Cog, BarChart3 } from "lucide-react"
 
 const projectsData = {
@@ -193,6 +193,46 @@ const projectsData = {
   },
 }
 
+function NeoSection({
+  icon: Icon,
+  title,
+  children,
+  delay = 0,
+}: {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  children: React.ReactNode
+  delay?: number
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay }}
+      className="neo-card p-6 bg-white"
+    >
+      <h2 className="flex items-center gap-2 text-xl font-bold mb-4">
+        <Icon className="h-5 w-5" />
+        {title}
+      </h2>
+      {children}
+    </motion.div>
+  )
+}
+
+function BulletList({ items, color }: { items: string[]; color: string }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item, index) => (
+        <li key={index} className="flex items-start gap-2">
+          <div className={`w-2 h-2 mt-2 flex-shrink-0 border-2 border-black ${color}`} />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export default function ProjectDetailPage() {
   const params = useParams()
   const router = useRouter()
@@ -201,234 +241,130 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-primary mb-4">Project Not Found</h1>
-          <Button onClick={() => router.push("/#projects")}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Projects
-          </Button>
+      <>
+        <ScrollProgress />
+        <div className="neo-page min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="neo-title mb-4">Project Not Found</h1>
+            <button type="button" onClick={() => router.push("/#projects")} className="neo-btn neo-btn-yellow">
+              <ArrowLeft className="h-4 w-4 inline mr-2" />
+              Back to Projects
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="bg-primary/5 border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Button variant="ghost" onClick={() => router.push("/#projects")} className="mb-6">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Projects
-          </Button>
+    <>
+      <ScrollProgress />
+      <div className="neo-page">
+        <Navigation />
+        <div className="px-6 sm:px-10 py-12">
+          <div className="max-w-6xl mx-auto">
+            <button
+              type="button"
+              onClick={() => router.push("/#projects")}
+              className="neo-btn neo-btn-white mb-8 text-sm"
+            >
+              <ArrowLeft className="h-4 w-4 inline mr-2" />
+              Back to Projects
+            </button>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Badge variant="secondary" className="mb-4">
-              {project.category}
-            </Badge>
-            <h1 className="text-4xl font-serif font-bold text-primary mb-4">{project.title}</h1>
-            <div className="flex items-center gap-4 text-muted-foreground">
-              <div className="flex items-center gap-2">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <span className="neo-badge neo-badge-cyan mb-4 inline-block">{project.category}</span>
+              <h1 className="neo-title mb-4">{project.title}</h1>
+              <div className="flex items-center gap-2 font-medium mb-10">
                 <Calendar className="h-4 w-4" />
                 <span>{project.period}</span>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Project Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <img
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                className="w-full h-64 object-cover rounded-lg shadow-lg"
-              />
             </motion.div>
 
-            {/* Overview */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-primary" />
-                    Project Overview
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-foreground leading-relaxed">{project.overview}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="neo-card overflow-hidden bg-white"
+                >
+                  <img
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-64 object-cover"
+                  />
+                </motion.div>
 
-            {/* Objectives */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Lightbulb className="h-5 w-5 text-primary" />
-                    Objectives
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {project.objectives.map((objective, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-foreground">{objective}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </motion.div>
+                <NeoSection icon={Target} title="Project Overview" delay={0.3}>
+                  <p className="leading-relaxed">{project.overview}</p>
+                </NeoSection>
 
-            {/* Methodology */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Cog className="h-5 w-5 text-primary" />
-                    Methodology
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {project.methodology.map((method, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-foreground">{method}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </motion.div>
+                <NeoSection icon={Lightbulb} title="Objectives" delay={0.4}>
+                  <BulletList items={project.objectives} color="bg-[var(--neo-yellow)]" />
+                </NeoSection>
 
-            {/* Results */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-primary" />
-                    Results & Achievements
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {project.results.map((result, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-foreground">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </motion.div>
+                <NeoSection icon={Cog} title="Methodology" delay={0.5}>
+                  <BulletList items={project.methodology} color="bg-[var(--neo-cyan)]" />
+                </NeoSection>
 
-            {/* Publication (if exists) */}
-            {project.publication && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-              >
-                <Card className="border-primary/20">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-primary">
-                      <Users className="h-5 w-5" />
-                      Published Research
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <h4 className="font-semibold text-lg mb-2">{project.publication.title}</h4>
-                    <p className="text-sm text-muted-foreground mb-2">{project.publication.authors}</p>
-                    <p className="text-sm font-medium text-accent mb-1">{project.publication.journal}</p>
-                    <p className="text-xs text-muted-foreground mb-3">{project.publication.details}</p>
-                    <p className="text-sm text-foreground leading-relaxed mb-4">{project.publication.abstract}</p>
-                    <Badge variant="outline">{project.publication.date}</Badge>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
-          </div>
+                <NeoSection icon={BarChart3} title="Results & Achievements" delay={0.6}>
+                  <BulletList items={project.results} color="bg-[var(--neo-green)]" />
+                </NeoSection>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Technologies */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Technologies Used</CardTitle>
-                </CardHeader>
-                <CardContent>
+                {"publication" in project && project.publication && (
+                  <NeoSection icon={Users} title="Published Research" delay={0.7}>
+                    <h4 className="font-bold text-lg mb-2">{project.publication.title}</h4>
+                    <p className="text-sm mb-2 opacity-80">{project.publication.authors}</p>
+                    <p className="text-sm font-semibold mb-1">{project.publication.journal}</p>
+                    <p className="text-xs opacity-70 mb-3">{project.publication.details}</p>
+                    <p className="text-sm leading-relaxed mb-4">{project.publication.abstract}</p>
+                    <span className="neo-badge neo-badge-pink">{project.publication.date}</span>
+                  </NeoSection>
+                )}
+              </div>
+
+              <div className="space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="neo-card p-6 bg-white"
+                >
+                  <h3 className="text-lg font-bold mb-4">Technologies Used</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
-                      <Badge key={index} variant="outline" className="text-xs">
+                      <span key={index} className="neo-badge neo-badge-green text-xs">
                         {tech}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                </motion.div>
 
-            {/* Project Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Project Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div>
-                    <span className="text-sm font-medium text-muted-foreground">Duration</span>
-                    <p className="text-sm font-semibold">{project.period}</p>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="neo-card p-6 bg-[var(--neo-yellow)]"
+                >
+                  <h3 className="text-lg font-bold mb-4">Project Information</h3>
+                  <div className="space-y-3">
+                    <div>
+                      <span className="text-sm font-medium opacity-70">Duration</span>
+                      <p className="font-semibold">{project.period}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium opacity-70">Category</span>
+                      <p className="font-semibold">{project.category}</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-sm font-medium text-muted-foreground">Category</span>
-                    <p className="text-sm font-semibold">{project.category}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-    </div>
+    </>
   )
 }

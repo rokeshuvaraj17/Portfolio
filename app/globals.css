@@ -1,30 +1,38 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Light theme only — clean, readable, professional */
 :root {
-  --background: oklch(0.985 0.004 100);
-  --foreground: oklch(0.2 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.02 260);
-  --primary: oklch(0.45 0.14 250);
-  --primary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.965 0.006 250);
-  --muted-foreground: oklch(0.45 0.02 260);
-  --accent: oklch(0.5 0.12 250);
-  --border: oklch(0.91 0.01 250);
-  --input: oklch(0.94 0.008 250);
-  --ring: oklch(0.45 0.14 250);
-  --radius: 0.625rem;
-  --secondary: oklch(0.94 0.02 250);
-  --secondary-foreground: oklch(0.25 0.02 260);
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.99 0 0);
+  --neo-bg: #ffffff;
+  --neo-text: #000000;
+  --neo-border: #000000;
+  --neo-yellow: #ffd93d;
+  --neo-cyan: #66d9ef;
+  --neo-pink: #ff6b9d;
+  --neo-green: #a8e6cf;
+  --neo-white: #ffffff;
+  --neo-shadow: 6px 6px 0 #000000;
+  --neo-shadow-sm: 4px 4px 0 #000000;
+  --neo-border-w: 3px;
+
+  --background: var(--neo-bg);
+  --foreground: var(--neo-text);
+  --card: var(--neo-white);
+  --card-foreground: var(--neo-text);
+  --primary: var(--neo-cyan);
+  --primary-foreground: var(--neo-text);
+  --secondary: var(--neo-yellow);
+  --secondary-foreground: var(--neo-text);
+  --muted: #f5f5f5;
+  --muted-foreground: #333333;
+  --accent: var(--neo-pink);
+  --border: var(--neo-border);
+  --input: var(--neo-white);
+  --ring: var(--neo-border);
+  --radius: 6px;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
   --popover: var(--card);
   --popover-foreground: var(--card-foreground);
-  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.04);
-  --shadow-md: 0 4px 12px oklch(0 0 0 / 0.06);
-  --shadow-lg: 0 8px 24px oklch(0 0 0 / 0.08);
 }
 
 @theme inline {
@@ -46,33 +54,119 @@
   --color-ring: var(--ring);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --radius-sm: calc(var(--radius) - 2px);
+  --radius-sm: 4px;
   --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 4px);
+  --radius-lg: 8px;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    @apply antialiased;
+    font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+    background: #d0d0d0;
+    color: var(--neo-text);
+    padding: 16px;
+    min-height: 100vh;
   }
 }
 
-/* Subtle grid — light theme */
-.bg-grid-pattern {
-  background-image:
-    linear-gradient(oklch(0 0 0 / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(0 0 0 / 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* Page frame — inspired by marjoballabani.me */
+.neo-page {
+  background:
+    repeating-linear-gradient(90deg, #f0f0f0 0, #f0f0f0 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient(0deg, #f0f0f0 0, #f0f0f0 1px, transparent 1px, transparent 20px),
+    var(--neo-bg);
+  border: 6px solid var(--neo-border);
+  box-shadow: 12px 12px 0 var(--neo-border);
+  min-height: calc(100vh - 32px);
+  overflow-x: hidden;
 }
 
-/* Card hover — soft shadow, no glow */
-.card-glow {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+/* Section title */
+.neo-title {
+  display: inline-block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  padding: 0.5rem 1rem;
+  background: var(--neo-yellow);
+  border: var(--neo-border-w) solid var(--neo-border);
+  box-shadow: var(--neo-shadow-sm);
+  margin-bottom: 2rem;
 }
-.card-glow:hover {
-  box-shadow: var(--shadow-lg);
+
+/* Cards */
+.neo-card {
+  background: var(--neo-white);
+  border: var(--neo-border-w) solid var(--neo-border);
+  box-shadow: var(--neo-shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.neo-card:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--neo-border);
+}
+
+/* Buttons */
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: var(--neo-border-w) solid var(--neo-border);
+  box-shadow: var(--neo-shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.neo-btn:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--neo-border);
+}
+.neo-btn-cyan { background: var(--neo-cyan); color: var(--neo-text); }
+.neo-btn-yellow { background: var(--neo-yellow); color: var(--neo-text); }
+.neo-btn-white { background: var(--neo-white); color: var(--neo-text); }
+.neo-btn-pink { background: var(--neo-pink); color: var(--neo-text); }
+
+/* Badge */
+.neo-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 2px solid var(--neo-border);
+  background: var(--neo-green);
+  box-shadow: 2px 2px 0 var(--neo-border);
+}
+
+/* Photo frame */
+.neo-photo {
+  border: 6px solid var(--neo-border);
+  box-shadow: 12px 12px 0 var(--neo-border);
+  background: var(--neo-white);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 14px; }
+::-webkit-scrollbar-track { background: var(--neo-white); border-left: 3px solid #000; }
+::-webkit-scrollbar-thumb { background: var(--neo-yellow); border: 3px solid #000; }
+
+@media (max-width: 768px) {
+  body { padding: 10px; }
+  .neo-page {
+    border-width: 3px;
+    box-shadow: 6px 6px 0 var(--neo-border);
+    min-height: calc(100vh - 20px);
+  }
+  .neo-title { font-size: 1.35rem; }
 }

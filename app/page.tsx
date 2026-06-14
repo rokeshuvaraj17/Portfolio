@@ -1,3 +1,4 @@
+import { ScrollProgress } from "@/components/scroll-progress"
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
@@ -11,17 +12,22 @@ import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
-    <main className="min-h-screen pb-24 sm:pb-0">
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <ExpertiseSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <TeachingSection />
-      <CoursesSection />
-      <PublicationsSection />
-      <Footer />
-    </main>
+    <>
+      <ScrollProgress />
+      <div className="neo-page">
+        <Navigation />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <ExpertiseSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <TeachingSection />
+          <CoursesSection />
+          <PublicationsSection />
+          <Footer />
+        </main>
+      </div>
+    </>
   )
 }

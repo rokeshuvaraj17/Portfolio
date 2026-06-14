@@ -1,8 +1,5 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, Briefcase, GraduationCap } from "lucide-react"
 import { motion } from "framer-motion"
 
 const professional = [
@@ -21,7 +18,7 @@ const professional = [
     location: "Bengaluru, India",
     period: "February 2021 – November 2024",
     description:
-      "Avohi Info Tech offers web development, software services, and digital marketing solutions. Built reusable integration components, optimized data flows, and implemented effective error-handling mechanisms including automated exception tracking and logging. Developed the front-end of a food delivery application.",
+      "Built reusable integration components, optimized data flows, and implemented effective error-handling mechanisms. Developed the front-end of a food delivery application.",
     skills: ["Integration", "Data Flows", "Error Handling", "Frontend Development"],
   },
 ]
@@ -31,133 +28,72 @@ const internship = {
   company: "Kaashiv Infotech",
   location: "Chennai, India",
   period: "June – July 2019",
-  tagline: "Internships and project solutions to equip students and professionals with technology knowledge.",
   points: [
     "Designed a rocket model and analyzed material suitability for rocket construction",
-    "Organized and analyzed data to support investigations of ground damage incidents of operational aircraft and employee injuries",
-    "Supported ground safety programs and accident/incident and injury reduction efforts; developed improved safety awareness training programs, leading to a 30% increase in safety awareness among employees",
+    "Organized and analyzed data to support investigations of ground damage incidents and employee injuries",
+    "Developed improved safety awareness training programs, leading to a 30% increase in safety awareness among employees",
   ],
-  skills: ["Rocket Design", "Material Analysis", "Safety Engineering", "Data Analysis", "Training Development"],
+  skills: ["Rocket Design", "Material Analysis", "Safety Engineering", "Data Analysis"],
 }
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 bg-muted/30 border-y border-border">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          className="text-2xl sm:text-3xl font-semibold text-foreground mb-12"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
+    <section id="experience" className="px-6 sm:px-10 py-16 border-t-[3px] border-black bg-[var(--neo-yellow)]/20">
+      <div className="max-w-6xl mx-auto">
+        <motion.h2 className="neo-title" initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           Experience
         </motion.h2>
 
         <div className="space-y-8">
           <div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
-              <Briefcase className="h-4 w-4" />
-              Professional Experience
-            </h3>
-            <div className="space-y-6">
+            <h3 className="font-bold uppercase text-sm mb-4 px-2 py-1 inline-block bg-[var(--neo-cyan)] border-2 border-black">Professional</h3>
+            <div className="space-y-5">
               {professional.map((exp, i) => (
-                <motion.div
-                  key={exp.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                >
-                  <Card className="border border-border bg-card shadow-sm rounded-xl overflow-hidden">
-                    <CardHeader className="pb-2">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                        <div>
-                          <CardTitle className="text-lg font-semibold text-foreground">{exp.title}</CardTitle>
-                          <p className="text-base font-medium text-primary mt-0.5">{exp.company}</p>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-3.5 w-3.5" />
-                            {exp.period}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-3.5 w-3.5" />
-                            {exp.location}
-                          </span>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{exp.description}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {exp.skills.map((s) => (
-                          <Badge key={s} variant="secondary" className="text-xs font-normal">
-                            {s}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                <motion.div key={exp.title} className="neo-card p-5 bg-white" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-2 mb-3">
+                    <div>
+                      <h4 className="font-bold text-lg">{exp.title}</h4>
+                      <p className="font-semibold text-[var(--neo-cyan)]">{exp.company}</p>
+                    </div>
+                    <div className="text-sm font-medium">
+                      <p>{exp.period}</p>
+                      <p>{exp.location}</p>
+                    </div>
+                  </div>
+                  <p className="text-sm mb-3 leading-relaxed">{exp.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.skills.map((s) => (
+                      <span key={s} className="neo-badge">{s}</span>
+                    ))}
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
-              <GraduationCap className="h-4 w-4" />
-              Internship
-            </h3>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-            >
-              <Card className="border-2 border-primary/20 bg-card shadow-sm rounded-xl overflow-hidden">
-                <CardHeader className="pb-2">
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <Badge variant="outline" className="text-primary border-primary/50 font-medium">
-                      Internship
-                    </Badge>
-                  </div>
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                    <div>
-                      <CardTitle className="text-lg font-semibold text-foreground">{internship.title}</CardTitle>
-                      <p className="text-base font-medium text-primary mt-0.5">{internship.company}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{internship.tagline}</p>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3.5 w-3.5" />
-                        {internship.period}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <MapPin className="h-3.5 w-3.5" />
-                        {internship.location}
-                      </span>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed mb-4">
-                    {internship.points.map((point, i) => (
-                      <li key={i} className="flex gap-2">
-                        <span className="text-primary mt-0.5">•</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-1.5">
-                    {internship.skills.map((s) => (
-                      <Badge key={s} variant="secondary" className="text-xs font-normal">
-                        {s}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+            <h3 className="font-bold uppercase text-sm mb-4 px-2 py-1 inline-block bg-[var(--neo-pink)] border-2 border-black">Internship</h3>
+            <motion.div className="neo-card p-5 bg-[var(--neo-pink)]/20 border-[3px] border-black" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-2 mb-3">
+                <div>
+                  <h4 className="font-bold text-lg">{internship.title}</h4>
+                  <p className="font-semibold">{internship.company}</p>
+                </div>
+                <div className="text-sm font-medium">
+                  <p>{internship.period}</p>
+                  <p>{internship.location}</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-sm mb-3">
+                {internship.points.map((p) => (
+                  <li key={p}>• {p}</li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                {internship.skills.map((s) => (
+                  <span key={s} className="neo-badge">{s}</span>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>

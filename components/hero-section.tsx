@@ -2,68 +2,69 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
 export function HeroSection() {
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 px-4 sm:px-6 lg:px-8 pt-28 md:pt-24 pb-16 bg-grid-pattern"
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/40 pointer-events-none" />
-      <div className="relative z-10 max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-12">
-        <div className="flex-1 text-center md:text-left">
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-4"
-            initial={{ opacity: 0, y: 20 }}
+    <section id="home" className="px-6 sm:px-10 py-16 sm:py-20">
+      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="space-y-5">
+          <motion.p
+            className="text-xl font-semibold text-[var(--neo-cyan)]"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
           >
-            Engineering Autonomous Intelligence.
+            Hello, I&apos;m
+          </motion.p>
+          <motion.h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Rokeshuvaraj Nagarajan
           </motion.h1>
           <motion.p
-            className="text-lg sm:text-xl text-muted-foreground max-w-xl mb-2"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-lg sm:text-xl leading-relaxed max-w-xl"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ delay: 0.2 }}
           >
             Aerospace Engineer specializing in Guidance, Control, State Estimation, and AI-Driven Flight Systems.
           </motion.p>
           <motion.p
-            className="text-sm text-muted-foreground/90 mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-sm font-medium px-3 py-2 inline-block bg-[var(--neo-green)] border-2 border-black shadow-[3px_3px_0_#000]"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ delay: 0.25 }}
           >
-            M.S. Aerospace Engineering — Virginia Tech
-            <br />
-            Autonomous Systems · GNC · Deep Learning
+            M.S. Aerospace Engineering — Virginia Tech · GNC · Deep Learning
           </motion.p>
           <motion.div
-            className="flex flex-wrap gap-3 justify-center md:justify-start"
-            initial={{ opacity: 0, y: 20 }}
+            className="flex flex-wrap gap-3 pt-2"
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ delay: 0.3 }}
           >
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link href="/#projects">View Projects</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-primary/50 text-primary hover:bg-primary/10">
-              <a href="/resume/Rokeshuvaraj_Resume.pdf" download="Rokeshuvaraj_Resume.pdf">Download Resume</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="text-muted-foreground hover:text-foreground">
-              <Link href="/contact">Contact</Link>
-            </Button>
+            <Link href="/#projects" className="neo-btn neo-btn-cyan">
+              View Projects
+            </Link>
+            <a href="/resume/Rokeshuvaraj_Resume.pdf" download="Rokeshuvaraj_Resume.pdf" className="neo-btn neo-btn-yellow">
+              Download Resume
+            </a>
+            <Link href="/contact" className="neo-btn neo-btn-white">
+              Contact
+            </Link>
           </motion.div>
         </div>
-        <div className="flex-1 flex justify-center md:justify-end">
-          <motion.div
-            className="relative w-full max-w-md aspect-[3/4] overflow-hidden"
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+
+        <motion.div
+          className="flex justify-center lg:justify-end"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.35 }}
+        >
+          <div className="relative w-full max-w-md aspect-[3/4] neo-photo overflow-hidden">
             <Image
               src="/images/Professional_Photo.jpg"
               alt="Rokeshuvaraj Nagarajan"
@@ -72,8 +73,8 @@ export function HeroSection() {
               sizes="(max-width: 768px) 100vw, 448px"
               priority
             />
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

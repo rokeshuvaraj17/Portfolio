@@ -4,27 +4,19 @@ import { motion } from "framer-motion"
 
 export function PublicationsSection() {
   return (
-    <section id="publications" className="py-24 bg-muted/30 border-y border-border">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          className="text-2xl sm:text-3xl font-semibold text-foreground mb-8"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
+    <section id="publications" className="px-6 sm:px-10 py-16 border-t-[3px] border-black bg-[var(--neo-green)]/20">
+      <div className="max-w-6xl mx-auto">
+        <motion.h2 className="neo-title" initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           Publication
         </motion.h2>
         <motion.blockquote
-          className="border-l-2 border-primary pl-6 py-2 text-muted-foreground text-sm sm:text-base max-w-2xl"
+          className="neo-card p-6 bg-white border-l-[6px] border-l-[var(--neo-yellow)]"
           initial={{ opacity: 0, x: -12 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
         >
-          <cite className="not-italic text-foreground font-medium">Design and Fabrication of Balloon Satellite</cite>
-          <br />
-          International Journal of Engineering Applied Sciences and Technology, 2020
+          <cite className="not-italic font-bold block mb-1">Design and Fabrication of Balloon Satellite</cite>
+          <span className="text-sm">International Journal of Engineering Applied Sciences and Technology, 2020</span>
         </motion.blockquote>
       </div>
     </section>

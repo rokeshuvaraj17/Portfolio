@@ -1,93 +1,53 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { motion } from "framer-motion"
 
 const expertise = [
   {
     title: "Guidance & Control",
-    items: [
-      "PID",
-      "LQR",
-      "MPC",
-      "Aircraft Longitudinal & Lateral Dynamics",
-      "Control Allocation",
-    ],
+    color: "bg-[var(--neo-cyan)]",
+    items: ["PID", "LQR", "MPC", "Aircraft Longitudinal & Lateral Dynamics", "Control Allocation"],
   },
   {
     title: "Estimation & Navigation",
-    items: [
-      "Kalman Filter",
-      "Extended Kalman Filter",
-      "Sensor Fusion",
-      "GPS Modeling",
-      "Satellite Navigation",
-    ],
+    color: "bg-[var(--neo-yellow)]",
+    items: ["Kalman Filter", "Extended Kalman Filter", "Sensor Fusion", "GPS Modeling", "Satellite Navigation"],
   },
   {
     title: "AI & Machine Learning",
-    items: [
-      "Neural Networks",
-      "Gradient Descent Optimization",
-      "Backpropagation",
-      "Classification Models",
-      "Deep Learning Foundations",
-      "Model Training & Evaluation",
-      "Data Pipelines",
-    ],
+    color: "bg-[var(--neo-pink)]",
+    items: ["Neural Networks", "Gradient Descent", "Backpropagation", "Classification Models", "Deep Learning Foundations", "Model Training & Evaluation", "Data Pipelines"],
   },
   {
     title: "Systems & Simulation",
-    items: [
-      "MATLAB / Simulink",
-      "6-DOF Modeling",
-      "Python",
-      "C/C++",
-      "ROS",
-      "Linux",
-      "Git",
-    ],
+    color: "bg-[var(--neo-green)]",
+    items: ["MATLAB / Simulink", "6-DOF Modeling", "Python", "C/C++", "ROS", "Linux", "Git"],
   },
 ]
 
 export function ExpertiseSection() {
   return (
-    <section id="expertise" className="py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          className="text-2xl sm:text-3xl font-semibold text-foreground mb-12"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
+    <section id="expertise" className="px-6 sm:px-10 py-16">
+      <div className="max-w-6xl mx-auto">
+        <motion.h2 className="neo-title" initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
           Expertise
         </motion.h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {expertise.map((group, i) => (
             <motion.div
               key={group.title}
+              className={`neo-card p-5 ${group.color}`}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
+              transition={{ delay: i * 0.05 }}
             >
-              <Card className="h-full border border-border bg-card shadow-sm card-glow rounded-xl overflow-hidden">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base font-semibold text-foreground">
-                    {group.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <ul className="space-y-1.5 text-sm text-muted-foreground">
-                    {group.items.map((item) => (
-                      <li key={item} className="leading-tight">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <h3 className="font-bold text-base mb-3 border-b-2 border-black pb-2">{group.title}</h3>
+              <ul className="space-y-1.5 text-sm font-medium">
+                {group.items.map((item) => (
+                  <li key={item}>• {item}</li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
