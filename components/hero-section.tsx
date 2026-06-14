@@ -49,9 +49,9 @@ export function HeroSection() {
             <Link href="/#projects" className="neo-btn neo-btn-cyan">
               View Projects
             </Link>
-            <a href="/resume/Rokeshuvaraj_Resume.pdf" download="Rokeshuvaraj_Resume.pdf" className="neo-btn neo-btn-yellow">
-              Download Resume
-            </a>
+            <Link href="/resume" className="neo-btn neo-btn-yellow">
+              View Resume
+            </Link>
             <Link href="/contact" className="neo-btn neo-btn-white">
               Contact
             </Link>

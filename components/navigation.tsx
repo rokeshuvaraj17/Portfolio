@@ -37,13 +37,9 @@ export function Navigation() {
               {link.label}
             </Link>
           ))}
-          <a
-            href="/resume/Rokeshuvaraj_Resume.pdf"
-            download="Rokeshuvaraj_Resume.pdf"
-            className="neo-btn neo-btn-cyan text-sm py-2 px-4"
-          >
+          <Link href="/resume" className="neo-btn neo-btn-cyan text-sm py-2 px-4">
             Resume
-          </a>
+          </Link>
         </div>
 
         <button
@@ -68,14 +64,13 @@ export function Navigation() {
               {link.label}
             </Link>
           ))}
-          <a
-            href="/resume/Rokeshuvaraj_Resume.pdf"
-            download="Rokeshuvaraj_Resume.pdf"
+          <Link
+            href="/resume"
             className="neo-btn neo-btn-cyan text-sm mt-2"
             onClick={() => setOpen(false)}
           >
             Resume
-          </a>
+          </Link>
         </div>
       )}
     </nav>
